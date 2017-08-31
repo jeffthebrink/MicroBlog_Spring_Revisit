@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MicroBlog!</title>
+</head>
+<body>
+
+{{^name}}
+<h2>Please Login:</h2>
+<form action="/login" method="post">
+    <input type="text" placeholder="Enter your name" name="userName"/>
+    <button type="submit">Login</button>
+</form>
+{{/name}}
+
+{{#name}}
+<h2>Welcome, {{.}}!</h2>
+<form action="/add-message" method="post">
+    <input type="text" placeholder="Enter your message" name="text">
+    <button type="submit">Submit</button>
+</form>
+
+<hr>
+<br>
+{{^messageList}}
+
+    No messages yet...
+    <br>
+{{/messageList}}
+
+
+{{#messageList}}
+
+<form action="/delete?id={{id}}" method="post">{{id}}. {{text}}<input type="hidden" value="{{id}}" name="id">
+    <button type="submit">Delete</button>
+</form>
+
+{{/messageList}}
+
+<br>
+
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+
+{{/name}}
+
+</body>
+</html>
